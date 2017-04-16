@@ -1,1 +1,47 @@
 #include <stdio.h>
+#include <sys/malloc.h>
+#include "SeqList.h"
+
+typedef unsigned int TSeqListNode;
+
+typedef struct _tag_seqlist 
+{
+	int capacity;
+	int length;
+	TSeqListNode* node;
+}TSeqList;
+
+SeqList* SeqList_Create(int capacity)
+{
+
+}
+void SeqList_Destroy(SeqList* list)
+{
+
+}
+void SeqList_Clear(SeqList* list)
+{
+
+}
+
+int SeqList_Capacity(SeqList* list)
+{
+
+}
+int SeqList_Length(SeqList* list)
+{
+
+}
+int SeqList_Insert(SeqList* list,SeqListNode* node,int pos)
+{
+
+}
+
+SeqListNode* SeqList_Get(SeqList* list,int pos)
+{
+
+}
+SeqListNode* SeqList_Delete(SeqList* list,int pos)
+{
+
+}
