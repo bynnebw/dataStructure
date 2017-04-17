@@ -9,15 +9,15 @@ typedef struct _tag_seqlist
 	int capacity;
 	int length;
 	TSeqListNode* node;
-}TSeqList;
+} TSeqList;
 
 SeqList* SeqList_Create(int capacity)
 {
 	TSeqList* ret = NULL;
 	
-	if (capacity >= 0)
+	if ( capacity >= 0 )
 	{
-		ret = (TSeqList*)malloc(sizeof(TSeqList*) + capacity * sizeof(TSeqListNode*));
+		ret = (TSeqList*)malloc(sizeof(TSeqList) + sizeof(TSeqListNode) * capacity);
 	}
 
 	if (ret != NULL)
@@ -80,7 +80,7 @@ int SeqList_Insert(SeqList* list,SeqListNode* node,int pos)
 		{
 			pos = sList->length;
 		}
-		for (int i = sList->length; i > pos; i--)
+		for (i = sList->length; i > pos; i--)
 		{
 			sList->node[i] = sList->node[i-1];
 		}
