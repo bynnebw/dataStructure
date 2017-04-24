@@ -105,19 +105,20 @@ CircleListNode* CircleList_Delete(CircleList* list, int pos)
 	if ( (sList != NULL) && (pos >= 0) )
 	{
 		CircleListNode* current = (CircleListNode*)sList;
-		CircleListNode* first = sList->header.next;
-		CircleListNode* last = (CircleListNode*)CircleList_Get(sList,sList->length - 1);
+		CircleListNode* first = sList->header.next;				//在删除前先对第一个元素进行标记
+		CircleListNode* last = (CircleListNode*)CircleList_Get(sList,sList->length - 1);	//所谓基于“气宗”门道，就是利用之前已经写好的函数来直接使用
 
 		for(i=0;i < pos;i++)
 		{
 			current = current->next;
 		}
-		ret = current->next;			//这句话该怎么形象的理解？究竟是怎么实现的删除元素？
-		current->next = ret->next;
+		
+		ret = current->next;			//得到所要删除的元素节点
+		current->next = ret->next;		//将要删除的节点的上一个节点的next指针，略过该要删除的节点，而指向删除节点的下一个节点。
 
 		sList->length--;
 
-		if ( first == ret )
+		if ( first == ret )					//这里实际上是做一个判断，如果删除的元素是原来链表的第一个元素，那么将表头节点的指针指向原来的第二个节点，而最后一个节点指向原来的链表中的第二个节点
 		{
 			sList->header.next = ret->next;
 			last->next = ret->next;
@@ -128,7 +129,7 @@ CircleListNode* CircleList_Delete(CircleList* list, int pos)
 			sList->slider = ret->next;
 		}
 
-		if ( sList->length == 0 )
+		if ( sList->length == 0 )			//最后判断一下链表是不是空了
 		{
 			sList->header.next = NULL;
 			sList->slider = NULL;
@@ -138,7 +139,11 @@ CircleListNode* CircleList_Delete(CircleList* list, int pos)
 	return ret;
 }
 
-CircleListNode* CircleList_DeleteNode(CircleList* list, CircleListNode* node)
+
+//------------------------------------------------------以下是循环链表所特有的部分--------------------------------------------------
+//关键是游标
+
+CircleListNode* CircleList_DeleteNode(CircleList* list, CircleListNode* node)	//可以直接删除循环链表里面的元素，而不需要提前知道他的下标
 {
 	TCircleList* sList = (TCircleList*)list;
 	CircleListNode* ret = NULL;
@@ -150,7 +155,7 @@ CircleListNode* CircleList_DeleteNode(CircleList* list, CircleListNode* node)
 
 		for(i = 0;i < sList->length; i++)
 		{
-			if ( current->next == node )
+			if ( current->next == node )			//主要是找到所要删除的元素在循环链表里的逻辑位置
 			{
 				ret = current->next;
 				break;
@@ -159,15 +164,15 @@ CircleListNode* CircleList_DeleteNode(CircleList* list, CircleListNode* node)
 			current = current->next;
 		}
 
-		if ( ret != NULL )
+		if ( ret != NULL )	
 		{
-			CircleList_Delete(sList,i);
+			CircleList_Delete(sList,i);			//如果真找到了，那么此时的i就是所要删除的元素在循环链表里面的逻辑位置，那么此时调用之前在程序里已经写好的删除操作
 		}
 	}
 	return ret;
 }
 
-CircleListNode* CircleList_Reset(CircleList* list)		//存在疑问
+CircleListNode* CircleList_Reset(CircleList* list)		//重置就是把
 {
 	TCircleList* sList = (TCircleList*)list;
 	CircleListNode* ret = NULL;
@@ -193,7 +198,7 @@ CircleListNode* CircleList_Current(CircleList* list)
 	return ret;
 }
 
-CircleListNode* CircleList_Next(CircleList* list)
+CircleListNode* CircleList_Next(CircleList* list)		//移动游标，游标往下一个移动
 {
 	TCircleList* sList = (TCircleList*)list;
 	CircleListNode* ret = NULL;
