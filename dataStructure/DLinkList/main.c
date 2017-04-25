@@ -2,6 +2,8 @@
 #include <sys/malloc.h>
 #include "DLinkList.h"
 
+//与前面的循环链表类似，双向链表也有类似游标的概念，我理解这个游标主要是指向当前指针所指向的元素。
+
 struct Value
 {
 	DLinkListNode header;
@@ -39,6 +41,38 @@ int main(int argc,char* argv[])
     }
     
     printf("\n");
+
+    //----------the next paragraph should be the unique part of the DLinkList-------//
+
+    DLinkList_Delete(list, DLinkList_Length(list)-1);
+    DLinkList_Delete(list, 0);
+
+    for(i=0; i<DLinkList_Length(list); i++)
+    {
+        pv = (struct Value*)DLinkList_Next(list);
+        
+        printf("%d\n", pv->v);
+    }
+    
+    printf("\n");
+    
+    //-------------the next of the code is the unique part----------------------------//
+
+    DLinkList_Reset(list);
+    DLinkList_Next(list);
+    
+    pv = (struct Value*)DLinkList_Current(list);
+    
+    printf("%d\n", pv->v);
+
+
+    DLinkList_Pre(list);
+    
+    pv = (struct Value*)DLinkList_Current(list);
+    
+    printf("%d\n", pv->v);
+
+    printf("Length: %d\n", DLinkList_Length(list));
 
     DLinkList_Destroy(list);
 
