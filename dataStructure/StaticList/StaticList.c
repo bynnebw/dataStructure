@@ -2,7 +2,7 @@
 #include <sys/malloc.h>
 #include "StaticList.h"
 
-#define AVAILABLE -1
+#define AVAILABLE -1								//用available来标示节点是否为空闲节点
 
 typedef struct _tag_StaticListNode
 {
@@ -16,12 +16,12 @@ typedef struct _tag_StaticList
     TStaticListNode header;
     TStaticListNode node[];
 } TStaticList;
-
+														
 StaticList* StaticList_Create(int capacity) // O(n)
 {
     TStaticList* ret = NULL;
     int i = 0;
-    
+    																	
     if( capacity >= 0 )
     {
         ret = (TStaticList*)malloc(sizeof(TStaticList) + sizeof(TStaticListNode) * (capacity + 1));

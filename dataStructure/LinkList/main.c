@@ -2,7 +2,7 @@
 #include <sys/malloc.h>
 #include "LinkList.h"
 
-struct Value
+struct Value            //节点元素
 {
     LinkListNode header;
     int v;
