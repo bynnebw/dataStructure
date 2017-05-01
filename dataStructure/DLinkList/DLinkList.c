@@ -220,7 +220,7 @@ DLinkListNode* DLinkList_Pre(DLinkList* list)
 	TDLinkList* sList = (TDLinkList*)list;
     DLinkListNode* ret = NULL;
 
-    if ( (sList!=NULL) && (sList->slider != NULL) )
+    if ( (sList != NULL) && (sList->slider != NULL) )
     {
     	ret = sList->slider;
     	sList->slider = ret->pre;
