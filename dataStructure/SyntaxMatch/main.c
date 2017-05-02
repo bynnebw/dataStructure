@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "LinkStack.h"
 
+/*
+**	判断是不是左标识符，采用switch的方法，把所有的可能都列出来了。
+**	感觉相当于自己做了一个字典，当程序扫描字符串的时候，遇到“左字符”
+*/	
+
 int isLeft (char c)
 {
 	int ret = 0;
