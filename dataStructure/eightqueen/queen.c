@@ -92,9 +92,9 @@ void find(int i)
 	{
 		for(j = 1;j <= N;j++)
 		{
-			if (check(i,j))
+			if (check(i,j))						//所以真正用到回溯法的地方是这里，使用递归的方法实现回溯。
 			{
-				board[i][j] = '*';
+				board[i][j] = '*';		
 				find(i+1);
 				board[i][j] = ' ';
 			}
