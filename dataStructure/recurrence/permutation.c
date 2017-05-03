@@ -21,8 +21,8 @@ void permutation(char s[],int b,int e)
 				permutation(s,b+1,e);
 
 				c = s[b];			//Don't know what's the use of the next three lines of codes.
-				s[b] = s[i];
-				s[i] = c;
+				s[b] = s[i];		//把出去一个元素之后的其他元素进行全排列，排列完之后，还需要把交换过的元素再交换回来
+				s[i] = c;			//这样再下一次循环的时候，就可以继续对除去下一个元素之外的其他元素进行全排列。
 
 			}
 		}
