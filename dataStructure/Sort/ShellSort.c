@@ -26,6 +26,22 @@ void swap(int array[], int i , int j)
 	array[j] = temp;
 }
 
+void ShellSort(int array[],int len) 		//This is main core of the algorithm
+{
+	int i = 0;
+	int j = 0;
+	int k = -1;
+	int temp = -1;
+	int gap = len;
+
+	do
+	{
+		
+		
+	}while( gap > 1 );
+
+}
+
 int main(int argc, char const *argv[])
 {
 	int array[] = {21,25,49,25,16,8};
