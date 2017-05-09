@@ -3,8 +3,8 @@
 /*
 **	This is the basic idea of the ShellSort 
 **	Algoritm.
-** ShellSort is consisit of the InsertSortation
-** It feels more like the FFT algorithm
+** 	ShellSort is consisit of the InsertSortation
+** 	It feels more like the FFT algorithm
 */
 
 void println(int array[],int len)
@@ -36,8 +36,22 @@ void ShellSort(int array[],int len) 		//This is main core of the algorithm
 
 	do
 	{
-		
-		
+		gap = gap / 3 + 1;	//这里是一个惊艳的问题，并没有明确的数学推导说明此步骤为什么最后除以3.
+		for (int i = gap; i < len; i+=gap )
+		{	
+			k = i;
+			temp = array[k];
+
+			for ( j = i - gap;(j >= 0) && (array[j] > temp); j -= gap )  //I need a explaination for this approch
+			{
+				array[j+gap] = array[j];		//这里面实际上是插入排序
+				k = j;			
+			}
+
+			array[k] = temp;
+
+		}
+
 	}while( gap > 1 );
 
 }
@@ -48,5 +62,9 @@ int main(int argc, char const *argv[])
 	int len = sizeof(array) / sizeof(*array);
 
 	println(array,len);	
+
+	ShellSort(array,len);
+
+	println(array,len);
 	return 0;
 }
