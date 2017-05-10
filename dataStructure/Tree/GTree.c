@@ -32,7 +32,7 @@ struct _tag_TLNode
 };
 
 //每个树节点都可以用组织链表来访问。因为数据封装，所以用户看不到，其实返回的是链表。
-GTree* GTree_Create();	
+GTree* GTree_Create()
 {
 	return LinkList_Create();
 }
@@ -60,18 +60,34 @@ int GTree_Insert(GTree* tree,GTreeData* data,int pPos)	//因为树的实现是�
 
 	if ( ret )
 	{
+		//在组织链表进行操作，申请节点空间。
+
 		TLNode* trNode = (TLNode*)malloc(sizeof(TLNode));	
 		TLNode* cldNode = (TLNode*)malloc(sizeof(TLNode));
+		
 		TLNode* pNode = (TLNode*)LinkList_Get(list,pPos);
-		GTreeNode* cNode = (GTreeNode*)malloc(sizeof(GTreeNode));	//在堆空间中malloc出一个节点出来，
+
+		GTreeNode* cNode = (GTreeNode*)malloc(sizeof(GTreeNode));	//在堆空间中malloc出一个节点出来,这个应该就是需要插入的节点
 
 		ret = (trNode != NULL ) && (cldNode != NULL ) && (cNode != NULL);
 
 		if ( ret )
 		{
 			cNode->data = data;
-			cNode->parent = pNode->node;	//这里的parent应该是取出来的，所以需要写代码把parent写出来。
+			cNode->parent = NULL;	//这里的parent应该是取出来的，所以需要写代码把parent写出来。
 			cNode->child = LinkList_Create();
+
+			trNode->node = cNode;
+			cldNode->node = cNode;
+
+			LinkList_Insert(list,(LinkListNode*)trNode,LinkList_Length(list));
+
+			if( pNode != NULL )
+			{
+				cNode->parent = pNode->node;
+
+				LinkList_Insert(pNode->node->child,(LinkListNode*)cldNode,LinkList_Length(pNode->node->child));
+			}
 		}
 		else
 		{
@@ -80,12 +96,19 @@ int GTree_Insert(GTree* tree,GTreeData* data,int pPos)	//因为树的实现是�
 			free(cNode);
 		}
 	}
+	return ret;
 }
 
 GTreeData* GTree_Delete(GTree* tree,int pos)
 {
+	TLNode* trNode = (TLNode*)LinkList_Get(tree,pos);
+	GTreeData* ret = NULL;
 
+	if ( trNode != NULL )
+	{
 
+	}
+	return ret;
 }
 
 GTreeData* GTree_Get(GTree* tree,int pos)
