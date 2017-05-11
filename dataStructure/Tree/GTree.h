@@ -3,7 +3,9 @@
 
 typedef void GTree;
 typedef void GTreeData;
-typedef void (GTree_Printf)(GTreeData*);
+
+//重命名一个函数指针，返回类型是void型，函数名称是GTree_Printf，参数是GTreeData*。
+typedef void (GTree_Printf)(GTreeData*);		//这是一个函数指针，用于给用户自定义打印方式。属于一个回调函数。
 
 GTree* GTree_Create();
 
