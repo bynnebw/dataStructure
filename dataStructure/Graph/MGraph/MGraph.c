@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <sys/malloc.h>
+#include "LinkQueue.h"
 #include "MGraph.h"
 
 /*
@@ -14,6 +15,28 @@ typedef struct _tag_Mgraph
 	int** matrix;
 
 } TMGraph;
+
+static void recursive_dfs(TMGraph* graph,int v,int visited[],MGraph_Printf* pFunc)
+{
+	int i = 0;
+	
+	pFunc(graph->v[v]);
+
+	visited[v] = 1;		//操作成功后，visited矩阵元素值设为1，表示已经访问。
+
+	printf(", ");
+
+	for( i = 0; i < graph->count; i++)
+	{
+		if ( (graph->matrix[v][i] != 0) && !visited[i] )
+		{
+			recursive_dfs(graph,i,visited,pFunc);
+		}
+	}
+
+}
+
+
 
 /*
 **	使用二维数组，动态实现邻接矩阵。
@@ -200,6 +223,34 @@ int MGraph_EdgeCount(MGraph* graph)
 	}
 
 	return ret;	
+}
+
+void MGraph_DFS(MGraph* graph,int v,MGraph_Printf pFunc)
+{
+	TMGraph* tGraph = (TMGraph*)graph;
+	int* visited = NULL;
+	int condition = (tGraph!=NULL);
+
+	condition = condition && (0<=v) && (v < tGraph->count);
+	condition = condition && (pFunc != NULL);
+	condition = condition && ((visited = (int*)calloc(tGraph->count,sizeof(int))) != NULL);
+
+	if ( condition )
+	{
+		int i = 0;
+
+		recursive_dfs(tGraph,v,visited,pFunc);
+
+		for ( i = 0;i < tGraph->count;i ++)
+		{
+			if ( !visited[i] )
+			{
+				recursive_dfs(tGraph,i,visited,pFunc);
+			}
+		}
+		printf("\n");
+	}
+	free(visited);
 }
 
 void MGraph_Display(MGraph* graph,MGraph_Printf* pFunc)

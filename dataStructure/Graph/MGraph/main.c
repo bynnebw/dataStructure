@@ -23,6 +23,10 @@ int main(int argc, char const *argv[])
 
 	MGraph_Display(graph,printf_data);
 
+	printf("Here comes the DFS of the tree:\n");
+
+	MGraph_DFS(graph,0,printf_data);
+
 	MGraph_Destroy(graph);
 
 	return 0;

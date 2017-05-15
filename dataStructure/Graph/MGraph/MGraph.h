@@ -23,6 +23,10 @@ int MGraph_VertexCount(MGraph* graph);
 
 int MGraph_EdgeCount(MGraph* graph);
 
+void MGraph_DFS(MGraph* graph, int v, MGraph_Printf* pFunc);
+
+void MGraph_BFS(MGraph* graph, int v, MGraph_Printf* pFunc);
+
 void MGraph_Display(MGraph* graph,MGraph_Printf* pFunc);
 
 #endif
