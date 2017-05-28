@@ -8,23 +8,21 @@ using namespace std;
 **	采用深度优先搜索算法进行迭代计算。
 */
 
-const int N = 10;
-const int M = 12;
+const int nn = 6;
+const int mm = 6;
 
-char field[N][M+1] = {
-	"+********++*",
-	"*+++*****+++",
-	"****++***++*",
-	"**********+*",
-	"*+*+*****++*",
-	"+*+*+*****+*",
-	"*+*+******+*",
-	"**+*******+*"
+char field_1[nn][mm+1] = {
+	"w..w..",
+	"w.w...",
+	".....w",
+	".w...w",
+	"w...ww",
+	"..w..."
 };
 
 void dfs(int x,int y)
 {
-	field[x][y] = '*';
+	field_1[x][y] = '.`';
 
 	for(int dx = -1;dx <= 1; dx++)
 	{
@@ -32,7 +30,7 @@ void dfs(int x,int y)
 		{
 			int nx = x + dx,ny = y + dy;
 
-			if(0 <= nx && nx < N && 0 <= ny && ny < M && field[nx][ny] == '+')
+			if(0 <= nx && nx < nn && 0 <= ny && ny < mm && field_1[nx][ny] == 'w')
 				dfs(nx,ny);
 		}
 	}
@@ -42,11 +40,11 @@ void dfs(int x,int y)
 void solve()
 {
 	int res = 0;
-	for(int i = 0;i < N; i ++)
+	for(int i = 0;i < nn; i ++)
 	{
-		for(int j = 0; j < M; j ++)
+		for(int j = 0; j < mm; j ++)
 		{
-			if( field[i][j] == '+' )
+			if( field_1[i][j] == 'w' )
 			{
 				dfs(i,j);
 				res ++;
