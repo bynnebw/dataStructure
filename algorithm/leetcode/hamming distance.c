@@ -15,9 +15,9 @@ int solve(int a, int b)
     
     while(tmpInt)
     {
-        if((tmpInt>>1)<<1 != tmpInt)
-        {
-            ++dis;
+        if((tmpInt>>1)<<1 != tmpInt)	//这里将tmpInt值先右移一位，再左移回来，这样可以将原来的	
+        {								//数值的最后一位置为0，这样再与原来的值相比较就可以知道了
+            ++dis;						//最后一位与原来的最后一位是否一致。如果不一致自然就置为1咯
         }
         
         tmpInt>>=1;
