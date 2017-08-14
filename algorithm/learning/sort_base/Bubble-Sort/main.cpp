@@ -27,7 +27,7 @@ void bubbleSort(T arr[],int n)
 
 int main(int argc, char const *argv[])
 {
-	int n = 10000;
+	int n = 100000;
 
 
 	//Test for random array
