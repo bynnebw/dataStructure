@@ -23,7 +23,6 @@ int main(int argc, char const *argv[])
 	Component<SparseGraph> component2(g2);
 	cout<<"TextG1.txt , component count: "<<component2.count()<<endl;
 	cout<<endl;
-	
 
 	return 0;
 }
